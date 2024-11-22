@@ -200,130 +200,80 @@ public class BankModel {
 	}
 
 
-//	public String CheckDetails(double Amount, long AccountNumber, String Password) throws SQLException, ClassNotFoundException {
-//	    Customer sender = getCustomer((long) se.getAttribute("id"));
-//	    if (sender == null) {
-//	        return "SenderNotFound";
-//	    }
-//
-//	    Customer recipient = getCustomer(AccountNumber);
-//	    if (recipient == null) {
-//	        return "RecipientNotFound";
-//	    }
-//
-//	    if (sender.getAccno() == recipient.getAccno()) {
-//	        return "SameAccountError";
-//	    }
-//
-//	    if (Amount <= 0 || sender.getbal() < Amount) {
-//	        return "InsufficientFunds";
-//	    }
-//
-//	    if (!sender.getPin().equals(Password)) {
-//	        return "PasswordError";
-//	    }
-//
-//	    try {
-//	        con.setAutoCommit(false);
-//
-//	        sender.setbal(sender.getbal() - Amount);
-//	        if (!updateCustomer(sender)) {
-//	            con.rollback();
-//	            return "SenderUpdateError";
-//	        }
-//
-//	        recipient.setbal(recipient.getbal() + Amount);
-//	        if (!updateCustomer(recipient)) {
-//	            con.rollback();
-//	            return "RecipientUpdateError";
-//	        }
-//
-//	        TransactionModel tm = new TransactionModel();
-//	        Transaction debitTransaction = new Transaction();
-//	        debitTransaction.setTransactionID(TransactionID.generatetransactionID());
-//	        debitTransaction.setUser(sender.getAccno());
-//	        debitTransaction.setRec_acc(recipient.getAccno());
-//	        debitTransaction.setTransaction("DEBITED");
-//	        debitTransaction.setAmount(Amount);
-//	        debitTransaction.setBalance(sender.getbal());
-//	        if (!tm.insertTransaction(debitTransaction)) {
-//	            con.rollback();
-//	            return "DebitTransactionError";
-//	        }
-//
-//	        Transaction creditTransaction = new Transaction();
-//	        creditTransaction.setTransactionID(debitTransaction.getTransactionID());
-//	        creditTransaction.setUser(recipient.getAccno());
-//	        creditTransaction.setRec_acc(sender.getAccno());
-//	        creditTransaction.setTransaction("CREDITED");
-//	        creditTransaction.setAmount(Amount);
-//	        creditTransaction.setBalance(recipient.getbal());
-//	        if (!tm.insertTransaction(creditTransaction)) {
-//	            con.rollback();
-//	            return "CreditTransactionError";
-//	        }
-//
-//	        con.commit();
-//	        return "Success";
-//	    } catch (SQLException e) {
-//	        con.rollback();
-//	        e.printStackTrace();
-//	        return "TransactionError";
-//	    } finally {
-//	        con.setAutoCommit(true);
-//	    }
-//	}
-	public String CheckDetails(String Amount, String AccountNumber, String Password) throws ClassNotFoundException, SQLException{
-		Customer c = getCustomer((long) se.getAttribute("id"));
-		TransactionModel tm = new TransactionModel();
-		String Status = "";
-		Transaction t1;
-		Transaction t2;
-		double amt = Double.parseDouble(Amount);
-		long Acn = Long.parseLong(AccountNumber);
-		Customer rec_acc = getCustomer(Acn);
-    	if(c.getAccno() != rec_acc.getAccno()){
-    		if(c.getbal() > 0 && c.getbal()>= amt && amt >0) {
-    			if(c.getPin().equals(Password)) {
-    				c.setbal(c.getbal()-amt);
-    				boolean c_res=updateCustomer(c);
-    				if(c_res) {
-    			    	t1= new Transaction(); 
-    			    	t1.setTransactionID(TransactionID.generatetransactionID());
-    			    	t1.setUser(c.getAccno()); 
-    			        t1.setRec_acc(rec_acc.getAccno()); 
-    			        t1.setTransaction("DEBITED"); 
-    			        t1.setAmount(amt); 
-    			        t1.setBalance(c.getbal());
-    			        boolean res1 = tm.insertTransaction(t1);
-    			        rec_acc.setbal(rec_acc.getbal()+amt); 
-    			        boolean receiver_res=updateCustomer(rec_acc); 
-    			        if(receiver_res) {
-    			        	{
-    			        		t2= new Transaction();
-    			        		t2.setTransactionID(t1.getTransactionID()); 
-    			        	    t2.setUser(rec_acc.getAccno()); 
-    			        	    t2.setRec_acc(c.getAccno()); 
-    			        	    t2.setTransaction("CREDITED"); 
-    			        	    t2.setAmount(amt); 
-    			        	    t2.setBalance(rec_acc.getbal()); 
-    			        	    boolean res11=tm.insertTransaction(t2);
-    			        	    Status ="sucess";
-    			        	}
-    			}	
-    		}else {
-    			Status="PasswordError";	
-    		}
-    	}else {
-    		Status = "AmountError";
-    	}
-    		
-	}else {
-		Status = "AccountError";
+	public String CheckDetails(double Amount, long AccountNumber, String Password) throws SQLException, ClassNotFoundException {
+	    Customer sender = getCustomer((long) se.getAttribute("id"));
+	    if (sender == null) {
+	        return "SenderNotFound";
+	    }
+
+	    Customer recipient = getCustomer(AccountNumber);
+	    if (recipient == null) {
+	        return "RecipientNotFound";
+	    }
+
+	    if (sender.getAccno() == recipient.getAccno()) {
+	        return "SameAccountError";
+	    }
+
+	    if (Amount <= 0 || sender.getbal() < Amount) {
+	        return "InsufficientFunds";
+	    }
+
+	    if (!sender.getPin().equals(Password)) {
+	        return "PasswordError";
+	    }
+
+	    try {
+	        con.setAutoCommit(false);
+
+	        sender.setbal(sender.getbal() - Amount);
+	        if (!updateCustomer(sender)) {
+	            con.rollback();
+	            return "SenderUpdateError";
+	        }
+
+	        recipient.setbal(recipient.getbal() + Amount);
+	        if (!updateCustomer(recipient)) {
+	            con.rollback();
+	            return "RecipientUpdateError";
+	        }
+
+	        TransactionModel tm = new TransactionModel();
+	        Transaction debitTransaction = new Transaction();
+	        debitTransaction.setTransactionID(TransactionID.generatetransactionID());
+	        debitTransaction.setUser(sender.getAccno());
+	        debitTransaction.setRec_acc(recipient.getAccno());
+	        debitTransaction.setTransaction("DEBITED");
+	        debitTransaction.setAmount(Amount);
+	        debitTransaction.setBalance(sender.getbal());
+	        if (!tm.insertTransaction(debitTransaction)) {
+	            con.rollback();
+	            return "DebitTransactionError";
+	        }
+
+	        Transaction creditTransaction = new Transaction();
+	        creditTransaction.setTransactionID(debitTransaction.getTransactionID());
+	        creditTransaction.setUser(recipient.getAccno());
+	        creditTransaction.setRec_acc(sender.getAccno());
+	        creditTransaction.setTransaction("CREDITED");
+	        creditTransaction.setAmount(Amount);
+	        creditTransaction.setBalance(recipient.getbal());
+	        if (!tm.insertTransaction(creditTransaction)) {
+	            con.rollback();
+	            return "CreditTransactionError";
+	        }
+
+	        con.commit();
+	        return "Success";
+	    } catch (SQLException e) {
+	        con.rollback();
+	        e.printStackTrace();
+	        return "TransactionError";
+	    } finally {
+	        con.setAutoCommit(true);
+	    }
 	}
-    }
-    	return Status;
-	}
+	
 
 
 	private boolean updateCustomer(Customer c) {
