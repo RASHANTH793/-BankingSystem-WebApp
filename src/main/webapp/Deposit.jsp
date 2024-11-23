@@ -13,10 +13,13 @@
 <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <style>
+<<<<<<< HEAD
        body{
          position:fixed;
          width:100%;
       }
+=======
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
        .error{
                 color:red;
                 flex:column;

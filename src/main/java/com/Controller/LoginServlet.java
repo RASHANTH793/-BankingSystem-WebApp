@@ -71,19 +71,33 @@ public class LoginServlet  extends HttpServlet{
         	String Status = b1.CheckDetails(Amount,AccountNumber,Ps);	
         	String message = "";
         	switch (Status) {
+<<<<<<< HEAD
         	    case "SameAccountError":
         	        message = "Within Same Account Can't Transfer!";
         	        break;
         	    case "InsufficientFunds":
+=======
+        	    case "AccountError":
+        	        message = "Within Same Account Can't Transfer!";
+        	        break;
+        	    case "AmountError":
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
         	        message = "Please Check Your Current Balance or Entered Balance!";
         	        break;
         	    case "PasswordError":
         	        message = "Please Check Your Account Password!";
         	        break;
+<<<<<<< HEAD
         	    case "Success":
         	        message = "Funds Successfully Transferred!";
         	        break;
         	    case "failure":
+=======
+        	    case "success":
+        	        message = "Funds Successfully Transferred!";
+        	        break;
+        	    default:
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
         	        message = "Funds Didn't Transfer!";
         	        break;
         	}
@@ -108,6 +122,17 @@ public class LoginServlet  extends HttpServlet{
         }  
 	}
 	
+<<<<<<< HEAD
+=======
+	
+	
+	
+	
+	
+
+
+
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
         try {

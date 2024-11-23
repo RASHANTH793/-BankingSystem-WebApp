@@ -79,7 +79,11 @@
                        <tr style="background-color: black;text-align:center;color:white">
                    <br>
                            <th>Acc_No</th>
+<<<<<<< HEAD
                            <th>Receiver</th>
+=======
+                           <th>Name</th>
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
                            <th>Transaction_Id</th>
                            <th>Transaction_Type</th>
                            <th>Transaction_Date</th>
@@ -103,14 +107,21 @@
                              %>
                           <tr style="text-align:center">
                            <td><%=session.getAttribute("id")%></td>
+<<<<<<< HEAD
                            <td><%=t.getRec_acc()%></td>
+=======
+                           <td><%=session.getAttribute("uname")%></td>
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
                            <td><%=t.getTransactionID()%></td>
                            <td><%=t.getTransaction()%></td>
                            <td><%=t.getDate()%></td>
                            <%if(t.getTransaction().equals("CREDITED")) { %>
                                 <td><%="+"+t.getAmount()%></td>
+<<<<<<< HEAD
                            <%} else {%>
                                 <td><%="-"+t.getAmount() %></td>
+=======
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
                            <%} %>
                            <td><%=t.getBalance()%></td>
                        </tr>     

@@ -201,14 +201,21 @@ public class BankModel {
 
 
 	public String CheckDetails(double Amount, long AccountNumber, String Password) throws SQLException, ClassNotFoundException {
+<<<<<<< HEAD
 		String status = "";
 	    Customer sender = getCustomer((long) se.getAttribute("id"));
 	    if (sender == null) {
 	        status = "SenderNotFound";
+=======
+	    Customer sender = getCustomer((long) se.getAttribute("id"));
+	    if (sender == null) {
+	        return "SenderNotFound";
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 	    }
 
 	    Customer recipient = getCustomer(AccountNumber);
 	    if (recipient == null) {
+<<<<<<< HEAD
 	    	status = "RecipientNotFound";
 	    }
 
@@ -222,6 +229,21 @@ public class BankModel {
 
 	    if (!sender.getPin().equals(Password)) {
 	    	status = "PasswordError";
+=======
+	        return "RecipientNotFound";
+	    }
+
+	    if (sender.getAccno() == recipient.getAccno()) {
+	        return "SameAccountError";
+	    }
+
+	    if (Amount <= 0 || sender.getbal() < Amount) {
+	        return "InsufficientFunds";
+	    }
+
+	    if (!sender.getPin().equals(Password)) {
+	        return "PasswordError";
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 	    }
 
 	    try {
@@ -230,13 +252,21 @@ public class BankModel {
 	        sender.setbal(sender.getbal() - Amount);
 	        if (!updateCustomer(sender)) {
 	            con.rollback();
+<<<<<<< HEAD
 	            
+=======
+	            return "SenderUpdateError";
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 	        }
 
 	        recipient.setbal(recipient.getbal() + Amount);
 	        if (!updateCustomer(recipient)) {
 	            con.rollback();
+<<<<<<< HEAD
 	            
+=======
+	            return "RecipientUpdateError";
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 	        }
 
 	        TransactionModel tm = new TransactionModel();
@@ -249,7 +279,11 @@ public class BankModel {
 	        debitTransaction.setBalance(sender.getbal());
 	        if (!tm.insertTransaction(debitTransaction)) {
 	            con.rollback();
+<<<<<<< HEAD
 	            
+=======
+	            return "DebitTransactionError";
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 	        }
 
 	        Transaction creditTransaction = new Transaction();
@@ -261,6 +295,7 @@ public class BankModel {
 	        creditTransaction.setBalance(recipient.getbal());
 	        if (!tm.insertTransaction(creditTransaction)) {
 	            con.rollback();
+<<<<<<< HEAD
 	           
 	        }
 
@@ -274,6 +309,20 @@ public class BankModel {
 	        con.setAutoCommit(true);
 	    }
 	    return status;
+=======
+	            return "CreditTransactionError";
+	        }
+
+	        con.commit();
+	        return "Success";
+	    } catch (SQLException e) {
+	        con.rollback();
+	        e.printStackTrace();
+	        return "TransactionError";
+	    } finally {
+	        con.setAutoCommit(true);
+	    }
+>>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
 	}
 	
 
