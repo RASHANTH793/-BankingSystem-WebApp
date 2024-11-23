@@ -15,13 +15,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 </head>
 <style>
-<<<<<<< HEAD
       body{
          position:fixed;
          width:100%;
       }
-=======
->>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
       h1{
             text-align: center;
             text-shadow: 1px 1px 1px;

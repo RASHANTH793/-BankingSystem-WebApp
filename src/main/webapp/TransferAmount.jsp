@@ -11,13 +11,12 @@
 <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <style>
-<<<<<<< HEAD
+
 body{
          position:fixed;
          width:100%;
       }
-=======
->>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
+
 .error {
 	color: red;
 	
@@ -116,13 +115,11 @@ h4 {
                      <h1 style="color:#1E1C68;font-weight:thin;text;font-size:30px;font-family:Apple Color Emoji">Welcome <%= session.getAttribute("uname")%><br> Your Account Id : <%=session.getAttribute("id") %></h1>
                  </div>
          <%}%>
-<<<<<<< HEAD
-         
-=======
+
          <% if (request.getAttribute("status") != null) {%>
                   <div id="msg" class="container"><%= request.getAttribute("status")%></div>
               <%} %>
->>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
+
 	    <a href="Home.jsp" id="btn" class="ml-5 text-decoration-none"> <img src="https://cdn-icons-png.flaticon.com/512/2985/2985162.png" style="height:25px;width:25px">  Back</a>
 	    <div class="container d-flex flex-column  mt-3 pt-3" style="background-color:#E8E8E8; height:300px; width:800px;">
               <h4 style:"font-weight=bold">Enter the Fields to Transfer the Amount</h4>
@@ -143,17 +140,14 @@ h4 {
                            <label>Enter the Password</label>
                            <input type="password" class="form-control  text-center" style="width:180px" name="Password">  
                       </div>
-<<<<<<< HEAD
                       
                     </div>
                     <button id="chkbtn" name="transferAmount" type="submit">Transfer</button>
                     <% if (request.getAttribute("Status") != null) {%>
                          <div id="msg" class="container"><%= request.getAttribute("Status")%></div>
                     <%} %>                   
-=======
-                      <button id="chkbtn" name="transferAmount" type="submit"  style="position:fixed;margin-top:120px">Transfer</button>
                     </div>                   
->>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
+
               </form>
               
          </div>

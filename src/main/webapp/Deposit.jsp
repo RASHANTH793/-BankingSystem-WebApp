@@ -18,8 +18,7 @@
          position:fixed;
          width:100%;
       }
-=======
->>>>>>> c0102665f43274db5c55f2496141a58bbf9b002a
+
        .error{
                 color:red;
                 flex:column;
